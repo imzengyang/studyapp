@@ -1,0 +1,24 @@
+{
+    "compilerOptions": {
+        "module": "CommonJS",
+        "target": "es6",
+        "noImplicitAny": true,
+        "removeComments": true,
+        "preserveWatchOutput": true,
+        "sourceMap": true,
+        "alwaysStrict": true,
+        "rootDir": "src",
+        "outDir": "dist"
+    },
+    "include": [
+        "src/**/*"
+    ],
+    "exclude": [
+        "node_moudules",
+        ".gitignore",
+        "index.html",
+        "tsconfig.json",
+        "package.json",
+        "main.js"
+    ]
+}
