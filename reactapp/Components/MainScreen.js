@@ -6,15 +6,12 @@ import { createBottomTabNavigator, TabBarBottom } from 'react-navigation'
 import HomeTab from './AppTabNavigators/HomeTab'
 import LikesTab from './AppTabNavigators/LikesTab'
 
-import SearchTab from './AppTabNavigators/SearchTab'
+import PlanTab from './AppTabNavigators/PlanTab'
 import ProfileTab from './AppTabNavigators/ProfileTab'
 
 export default class MainScreen extends Component {
 
 
-    static navigationOptions = {
-        title: "Home page"
-    }
     render() {
         return (
             <AppTabNavigator />
@@ -24,18 +21,17 @@ export default class MainScreen extends Component {
 
 
 const AppTabNavigator = createBottomTabNavigator({
-    HomeTab: { screen: HomeTab },
-    SearchTab: { screen: SearchTab },
-    LikesTab: { screen: LikesTab },
-    ProfileTab: { screen: ProfileTab }
+    发现: { screen: HomeTab },
+    学习计划: { screen: PlanTab },
+    收藏: { screen: LikesTab },
+    我的: { screen: ProfileTab }
 }, {
         animationEnabled: true,
         swipeEnabled: true,
-        
         tabBarPosition: "bottom",
         tabBarOptions: {
             labelStyle: {
-              fontSize: 14,
+              fontSize: 12,
             },
             tabStyle: {
               width: 100,
