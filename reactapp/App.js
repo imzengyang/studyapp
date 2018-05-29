@@ -14,10 +14,14 @@ import {
 import {StackNavigator} from 'react-navigation';
 
 import MainScreen from "./Components/MainScreen";
+import DetailScreen from './Components/OtherScreen/DetailScreen'
 
 const AppStackNavigator = StackNavigator({
   Main:{
     screen: MainScreen
+  },
+  Details:{
+    screen: DetailScreen
   }
 })
 

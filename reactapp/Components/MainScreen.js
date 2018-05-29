@@ -2,22 +2,26 @@
 import React, { Component } from 'react';
 import { View, Text, Platform } from 'react-native';
 
-import { createBottomTabNavigator, TabBarBottom } from 'react-navigation'
+import { createBottomTabNavigator, TabBarBottom, StackNavigator } from 'react-navigation'
 import HomeTab from './AppTabNavigators/HomeTab'
 import LikesTab from './AppTabNavigators/LikesTab'
 
 import PlanTab from './AppTabNavigators/PlanTab'
 import ProfileTab from './AppTabNavigators/ProfileTab'
 
+
+import DetailsScreen from './OtherScreen/DetailScreen'
 export default class MainScreen extends Component {
 
 
     render() {
         return (
-            <AppTabNavigator />
+            <MainStack />
         );
     }
 }
+
+
 
 
 const AppTabNavigator = createBottomTabNavigator({
@@ -31,10 +35,23 @@ const AppTabNavigator = createBottomTabNavigator({
         tabBarPosition: "bottom",
         tabBarOptions: {
             labelStyle: {
-              fontSize: 12,
+                fontSize: 12,
             },
             tabStyle: {
-              width: 100,
+                width: 100,
             }
-          }
+        }
+    })
+
+const MainStack = StackNavigator({
+    Main: {
+        screen: AppTabNavigator
+    },
+    Details: {
+        screen: DetailsScreen,
+    }
+}, {
+        initialRouteName: "Main",
+        headerMode: 'none',
+        mode: 'modal'
     })
