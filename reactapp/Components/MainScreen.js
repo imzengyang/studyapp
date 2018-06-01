@@ -1,4 +1,4 @@
-
+import { Root } from "native-base";
 import React, { Component } from 'react';
 import { View, Text, Platform } from 'react-native';
 
@@ -16,7 +16,9 @@ export default class MainScreen extends Component {
 
     render() {
         return (
-            <MainStack />
+            <Root>
+                <MainStack />
+            </Root>
         );
     }
 }

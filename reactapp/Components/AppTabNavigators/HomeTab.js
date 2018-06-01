@@ -1,15 +1,46 @@
 import React, { Component } from 'react';
 import { View, Text, Image, } from 'react-native';
-import { Container, Content, Header, Left, Body, Right, Button, Icon, Title, Card, CardItem, Thumbnail } from 'native-base';
+import { Container, Content, Header, Left, Body, Right, Button, Toast, Icon, Title, Card, CardItem, Thumbnail } from 'native-base';
 
 import { StackNavigator } from "react-navigation";
 
 export default class HomeTab extends Component {
 
+    constructor(props){
+        super(props);
+        this.state={
+            orderText:"预约",
+        
+        }
+    }
+
     static navigationOptions = {
         tabBarIcon: ({ tintColor }) => (
             <Icon name="md-eye" style={{ color: tintColor }} />
         )
+    }
+
+    changeOrder(){
+    
+        if (this.state.orderText == "预约"){
+            Toast.show({
+                text: "预约成功！",
+                duration: 1000
+              })
+            this.setState({
+                orderText:"取消预约"
+            })
+        }else{
+            Toast.show({
+                text: "取消成功！",
+                duration: 1000
+            })
+            
+            this.setState({
+                orderText:"预约"
+            })
+        }
+        
     }
     render() {
         return (
@@ -40,8 +71,8 @@ export default class HomeTab extends Component {
                                     </Button>
                                 </Body>
                             </Left>
-                            <Button rounded danger style={{ paddingLeft: 25, paddingRight: 25, position: 'absolute', right: 10, top: 100 }}>
-                                <Text style={{ fontSize: 18, color: "white" }}>预约</Text>
+                            <Button rounded danger style={{ paddingLeft: 25, paddingRight: 25, position: 'absolute', right: 10, top: 100 }} onPress={this.changeOrder.bind(this)}>
+                                <Text style={{ fontSize: 18, color: "white" }} >{this.state.orderText}</Text>
                             </Button>
 
                         </CardItem>
