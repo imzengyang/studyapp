@@ -2,12 +2,7 @@
 import React, { Component } from 'react';
 import { Container, Header,Title,Right, Content, Card, CardItem, Thumbnail, Text, Button, Icon,H2, Left, Body } from 'native-base';
 export default class PlanTab extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      showToast: false
-    };
-  }
+
 
   static navigationOptions = {
     tabBarIcon: ({ tintColor }) => (

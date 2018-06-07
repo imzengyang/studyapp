@@ -29,7 +29,7 @@ export default class MainScreen extends Component {
 const AppTabNavigator = createBottomTabNavigator({
     发现: { screen: HomeTab },
     学习计划: { screen: PlanTab },
-    收藏: { screen: LikesTab },
+    预约: { screen: LikesTab },
     我的: { screen: ProfileTab }
 }, {
         animationEnabled: true,
