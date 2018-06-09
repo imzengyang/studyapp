@@ -1,59 +1,56 @@
 
 import React, { Component } from 'react';
-import { Container, Header,Title,Right, Content, Card, CardItem, Thumbnail, Text, Button, Icon,H2, Left, Body } from 'native-base';
+import { Container, Header, Title, Right, Content, Card, CardItem, Thumbnail, Text, Button, Icon, H2, Left, Body } from 'native-base';
+import InterViewComponent from '../Containers/InterView';
+
 export default class PlanTab extends Component {
 
-
+  constructor(props) {
+    super(props)
+    this.state = {
+      topics: [...{ ...{} }]
+    }
+  }
   static navigationOptions = {
     tabBarIcon: ({ tintColor }) => (
-        <Icon name="ios-book" style={{ color: tintColor }} />
+      <Icon name="ios-book" style={{ color: tintColor }} />
     )
   }
 
+  componentDidMount() {
+    fetch('http://118.31.19.120:3000/api/v1/topics?page=1&tab=ask&limit=5&mdrender=false')
+      .then(r => (r.json()))
+      .then(res => {
 
-  
+        this.setState({
+          topics: res.data
+        })
+      })
+  }
+
   render() {
+    
     return (
       <Container>
         <Header>
-        <Left />
+          <Left />
           <Body>
-              <Title>学习计划</Title>
+            <Title>学习计划</Title>
           </Body>
           <Right>
-              <Button transparent>
-                  <Icon name='menu' />
-              </Button>
+            <Button transparent>
+              <Icon name='menu' />
+            </Button>
           </Right>
         </Header>
         <Content>
-          <Card style={{flex: 0}}>
-            <CardItem>
-              <Left>
-                <Thumbnail source={require('../../Assets/images/timg.jpeg')} />
-                <Body>
-                  <Text>perrty</Text>
-                  <H2>python selenium</H2>
-                </Body>
-              </Left>
-            </CardItem>
-            <CardItem>
-              <Body>
-                
-                <Text>
-                  2018-06-10 四川北路
-                </Text>
-              </Body>
-            </CardItem>
-            <CardItem>
-              <Left>
-                <Button transparent textStyle={{color: '#87838B'}}>
-                  <Icon name="logo-github" />
-                  <Text>预约人数：15</Text>
-                </Button>
-              </Left>
-            </CardItem>
-          </Card>
+          {this.state.topics.map(topic => {
+            let user = topic.author;
+            return (
+            
+            <InterViewComponent user={user} topic={topic}/>
+          )})}
+          
         </Content>
       </Container>
     );
