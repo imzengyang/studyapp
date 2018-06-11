@@ -1,5 +1,6 @@
 
 import React, { Component } from 'react';
+import {RefreshControl} from 'react-native'
 import { Container, Header, Title, Right, Content, Card, CardItem, Thumbnail, Text, Button, Icon, H2, Left, Body } from 'native-base';
 import InterViewComponent from '../Containers/InterView';
 
@@ -8,7 +9,9 @@ export default class PlanTab extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      topics: [...{ ...{} }]
+      topics: [...{ ...{} }],
+      refreshing:false,
+      page:1
     }
   }
   static navigationOptions = {
@@ -17,15 +20,30 @@ export default class PlanTab extends Component {
     )
   }
 
-  componentDidMount() {
-    fetch('http://118.31.19.120:3000/api/v1/topics?page=1&tab=ask&limit=5&mdrender=false')
+  fetchData(){
+    let {page} = this.state
+    fetch(`http://118.31.19.120:3000/api/v1/topics?page=${page}&tab=ask&limit=5&mdrender=false`)
       .then(r => (r.json()))
       .then(res => {
 
         this.setState({
-          topics: res.data
+          topics: res.data,
+          refreshing:false
         })
       })
+  }
+
+  componentDidMount() {
+    this.fetchData();
+  }
+
+  _onRefresh(){
+    this.setState({
+      refreshing:true,
+      page:this.state.page + 1, 
+    })
+    this.fetchData();
+
   }
 
   render() {
@@ -43,7 +61,12 @@ export default class PlanTab extends Component {
             </Button>
           </Right>
         </Header>
-        <Content>
+        <Content refreshControl={
+           <RefreshControl
+           refreshing={this.state.refreshing}
+           onRefresh={this._onRefresh.bind(this)}
+          />
+        }>
           {this.state.topics.map(topic => {
             let user = topic.author;
             return (
